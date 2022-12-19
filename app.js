@@ -1,6 +1,7 @@
 const searchBtn = document.getElementById('search-btn');
 const fieldInputSearch = document.getElementById('msearch');
 const dataWrapper = document.getElementById('data-wrapper');
+const tagString = document.querySelector('.tag');
 let requestField = 'auto';
 
 searchBtn.addEventListener('click', () => {
@@ -66,6 +67,7 @@ function renderCatalog() {
         .then(data => {
             if (data) {
                 dataWrapper.innerHTML = '';
+                tagString.innerHTML = requestField;
                 console.log(data);
                 data.forEach(item => {
                     dataWrapper.innerHTML += createTemplate(item);
