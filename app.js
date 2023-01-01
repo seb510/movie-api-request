@@ -6,18 +6,29 @@ let requestField = 'auto';
 
 searchBtn.addEventListener('click', () => {
     requestField = fieldInputSearch.value;
+    console.log(requestField)
+    if (requestField == '') {
+        return false
+    }
     renderCatalog();
 })
 
 const createTemplate = data => {
     let genres = [];
+    let description = '';
 
     if (data.show.genres.length) {
         genres = data.show.genres.reduce((acc, item) => {
             return acc + ", " + item;
         })
     } else {
-        genres = 'unknow';
+        genres = 'Without info';
+    }
+
+    if (data.show.summary) {
+        description = data.show.summary
+    } else {
+        description = 'Without Description';
     }
 
     return `
@@ -52,7 +63,7 @@ const createTemplate = data => {
 		</div>
 		<div>
 			<span>Description:</span>
-			${data.show.summary}
+			${description}
 		</div>
 		</div>
  	</div>
